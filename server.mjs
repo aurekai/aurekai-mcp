@@ -10,7 +10,7 @@ const VERSION = "0.8.0-alpha.3";
 const TOOL_DEFS = [
   {
     "name": "akai_api",
-    "description": "BonfyreAPI v2 \u2014 Async HTTP gateway for the Bonfyre binary family. (category: platform)",
+    "description": "AkaiAPI v2 \u2014 Async HTTP gateway for the Akai binary family. (category: platform)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -31,7 +31,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_auth",
-    "description": "BonfyreAuth \u2014 user management and session tokens. (category: platform)",
+    "description": "AkaiAuth \u2014 user management and session tokens. (category: platform)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -73,7 +73,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_cli",
-    "description": "bonfyre \u2014 unified CLI dispatcher. (category: platform)",
+    "description": "akai \u2014 unified CLI dispatcher. (category: platform)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -94,7 +94,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_cms",
-    "description": "BonfyreCMS \u2014 stripped binary CMS. (category: data)",
+    "description": "AkaiCMS \u2014 stripped binary CMS. (category: data)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -115,7 +115,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_canon",
-    "description": "BonfyreCanon \u2014 structure-aware canonicalization via Tree-sitter. (category: data)",
+    "description": "AkaiCanon \u2014 structure-aware canonicalization via Tree-sitter. (category: data)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -136,7 +136,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_capability",
-    "description": "bonfyre-capability - capability discovery and matching layer. (category: platform)",
+    "description": "akai-capability - capability discovery and matching layer. (category: platform)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -157,7 +157,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_clips",
-    "description": "BonfyreClips \u2014 Clip Discovery Engine. (category: media)",
+    "description": "AkaiClips \u2014 Clip Discovery Engine. (category: media)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -178,7 +178,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_compete",
-    "description": "bonfyre-compete \u2014 stage/model A/B competition engine. (category: specialized)",
+    "description": "akai-compete \u2014 stage/model A/B competition engine. (category: specialized)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -199,7 +199,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_compress",
-    "description": "BonfyreCompress \u2014 family-aware compression engine. (category: data)",
+    "description": "AkaiCompress \u2014 family-aware compression engine. (category: data)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -220,7 +220,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_control",
-    "description": "bonfyre-control \u2014 control plane for Bonfyre inference pipelines. (category: misc)",
+    "description": "akai-control \u2014 control plane for Akai inference pipelines. (category: misc)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -241,7 +241,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_detect_objects",
-    "description": "BonfyreDetectObjects \u2014 Object detection operator for V1/I1 pipelines. (category: specialized)",
+    "description": "AkaiDetectObjects \u2014 Object detection operator for V1/I1 pipelines. (category: specialized)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -262,7 +262,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_discip",
-    "description": "BonfyreDiscipl operator. (category: specialized)",
+    "description": "AkaiDiscipl operator. (category: specialized)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -283,7 +283,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_distribute",
-    "description": "BonfyreDistribute operator. (category: artifacts)",
+    "description": "AkaiDistribute operator. (category: artifacts)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -304,7 +304,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_economy",
-    "description": "bonfyre-economy \u2014 cost-aware routing and budget enforcement. (category: specialized)",
+    "description": "akai-economy \u2014 cost-aware routing and budget enforcement. (category: specialized)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -325,7 +325,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_embed",
-    "description": "BonfyreEmbed \u2014 text embeddings via ONNX Runtime C API. Produces: .bfvec. (category: inference)",
+    "description": "AkaiEmbed \u2014 text embeddings via ONNX Runtime C API. Produces: .bfvec. (category: inference)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -346,7 +346,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_emit",
-    "description": "BonfyreEmit \u2014 multi-format output engine. (category: artifacts)",
+    "description": "AkaiEmit \u2014 multi-format output engine. (category: artifacts)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -367,7 +367,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_entity",
-    "description": "bonfyre-entity \u2014 universal identity resolution layer. (category: knowledge)",
+    "description": "akai-entity \u2014 universal identity resolution layer. (category: knowledge)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -388,7 +388,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_fpq",
-    "description": "main.c \u2014 bonfyre-fpq CLI. Produces: .bfq. (category: inference)",
+    "description": "main.c \u2014 akai-fpq CLI. Produces: .bfq. (category: inference)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -409,7 +409,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_fpqx",
-    "description": "bonfyre-fpqx \u2014 Cross-family FPQ alignment. Accepts: .bfq. Produces: .bfqx. (category: inference)",
+    "description": "akai-fpqx \u2014 Cross-family FPQ alignment. Accepts: .bfq. Produces: .bfqx. (category: inference)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -430,7 +430,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_family",
-    "description": "bonfyre-family - conceptual family browser for Bonfyre. (category: specialized)",
+    "description": "akai-family - conceptual family browser for Akai. (category: specialized)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -451,7 +451,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_finance",
-    "description": "BonfyreFinance \u2014 service arbitrage, labor pipeline, and bundle pricing engine. (category: data)",
+    "description": "AkaiFinance \u2014 service arbitrage, labor pipeline, and bundle pricing engine. (category: data)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -472,7 +472,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_flash_qla",
-    "description": "bonfyre-flashqla \u2014 BonfyreGDN Chunked Prefill (native C kernel). (category: inference)",
+    "description": "akai-flashqla \u2014 AkaiGDN Chunked Prefill (native C kernel). (category: inference)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -493,7 +493,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_flow",
-    "description": "bonfyre-flow \u2014 coroutine-native pipeline programming. (category: pipeline)",
+    "description": "akai-flow \u2014 coroutine-native pipeline programming. (category: pipeline)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -514,7 +514,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_fragment",
-    "description": "BonfyreFragment \u2014 Fragment system CLI. (category: knowledge)",
+    "description": "AkaiFragment \u2014 Fragment system CLI. (category: knowledge)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -535,7 +535,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_frame_extract",
-    "description": "bonfyre-frame-extract. (category: media)",
+    "description": "akai-frame-extract. (category: media)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -556,7 +556,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_gate",
-    "description": "BonfyreGate \u2014 license enforcement + access control. (category: pipeline)",
+    "description": "AkaiGate \u2014 license enforcement + access control. (category: pipeline)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -577,7 +577,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_gen",
-    "description": "bonfyre-gen \u2014 natural language \u2192 recipe YAML generator. (category: data)",
+    "description": "akai-gen \u2014 natural language \u2192 recipe YAML generator. (category: data)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -598,7 +598,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_graph",
-    "description": "BonfyreGraph \u2014 Merkle-DAG artifact graph engine. Produces: .bfgraph. (category: knowledge)",
+    "description": "AkaiGraph \u2014 Merkle-DAG artifact graph engine. Produces: .bfgraph. (category: knowledge)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -619,7 +619,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_hash",
-    "description": "BonfyreHash \u2014 content-addressing + Merkle DAG hashing engine. (category: artifacts)",
+    "description": "AkaiHash \u2014 content-addressing + Merkle DAG hashing engine. (category: artifacts)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -640,7 +640,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_index",
-    "description": "BonfyreIndex \u2014 artifact family indexer and search engine. (category: knowledge)",
+    "description": "AkaiIndex \u2014 artifact family indexer and search engine. (category: knowledge)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -661,7 +661,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_ingest",
-    "description": "BonfyreIngest \u2014 universal intake binary. (category: artifacts)",
+    "description": "AkaiIngest \u2014 universal intake binary. (category: artifacts)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -682,7 +682,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_kv_cache",
-    "description": "bonfyre-kvcache \u2014 v8 RLF KV cache compression. (category: knowledge)",
+    "description": "akai-kvcache \u2014 v8 RLF KV cache compression. (category: knowledge)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -703,7 +703,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_layer",
-    "description": "bonfyre-layer \u2014 Layer-aware ONNX model inspection and extraction (C port). (category: knowledge)",
+    "description": "akai-layer \u2014 Layer-aware ONNX model inspection and extraction (C port). (category: knowledge)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -724,7 +724,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_leapfrog",
-    "description": "bonfyre-leapfrog \u2014 Hamiltonian conservation and reversibility test. Accepts: .bfq, .bfvec. (category: inference)",
+    "description": "akai-leapfrog \u2014 Hamiltonian conservation and reversibility test. Accepts: .bfq, .bfvec. (category: inference)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -745,7 +745,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_learn",
-    "description": "bonfyre-learn \u2014 artifact-level feedback and threshold tuning. (category: inference)",
+    "description": "akai-learn \u2014 artifact-level feedback and threshold tuning. (category: inference)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -766,7 +766,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_ledger",
-    "description": "BonfyreLedger \u2014 value accounting engine. (category: artifacts)",
+    "description": "AkaiLedger \u2014 value accounting engine. (category: artifacts)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -787,7 +787,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_mfa_dict",
-    "description": "BonfyreMFADict operator. (category: specialized)",
+    "description": "AkaiMFADict operator. (category: specialized)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -808,7 +808,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_media_prep",
-    "description": "BonfyreMediaPrep operator. (category: media)",
+    "description": "AkaiMediaPrep operator. (category: media)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -829,7 +829,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_meter",
-    "description": "BonfyreMeter \u2014 usage metering + billing events. (category: platform)",
+    "description": "AkaiMeter \u2014 usage metering + billing events. (category: platform)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -850,7 +850,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_moq",
-    "description": "bonfyre-moq \u2014 Media over QUIC style relay for Bonfyre. (category: specialized)",
+    "description": "akai-moq \u2014 Media over QUIC style relay for Akai. (category: specialized)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -871,7 +871,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_model",
-    "description": "BonfyreModel \u2014 model dependency manager for bonfyre pipelines. Produces: .bfmodel. (category: inference)",
+    "description": "AkaiModel \u2014 model dependency manager for akai pipelines. Produces: .bfmodel. (category: inference)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -892,7 +892,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_narrate",
-    "description": "BonfyreNarrate v3 \u2014 Verified Tone-Aware Text-to-Speech Synthesis. (category: media)",
+    "description": "AkaiNarrate v3 \u2014 Verified Tone-Aware Text-to-Speech Synthesis. (category: media)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -913,7 +913,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_net",
-    "description": "bonfyre-net \u2014 Bonfyre Netlist Runtime. (category: platform)",
+    "description": "akai-net \u2014 Akai Netlist Runtime. (category: platform)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -955,7 +955,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_orchestrate",
-    "description": "BonfyreOrchestrate operator. (category: pipeline)",
+    "description": "AkaiOrchestrate operator. (category: pipeline)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -976,7 +976,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_outreach",
-    "description": "BonfyreOutreach \u2014 quiet distribution engine. (category: data)",
+    "description": "AkaiOutreach \u2014 quiet distribution engine. (category: data)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -997,7 +997,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_pack",
-    "description": "BonfyrePack operator. Produces: .bf, .bfa. (category: artifacts)",
+    "description": "AkaiPack operator. Produces: .bf, .bfa. (category: artifacts)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -1018,7 +1018,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_paragraph",
-    "description": "BonfyreParagraph operator. (category: knowledge)",
+    "description": "AkaiParagraph operator. (category: knowledge)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -1039,7 +1039,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_pay",
-    "description": "BonfyrePay \u2014 payment & invoice management. (category: data)",
+    "description": "AkaiPay \u2014 payment & invoice management. (category: data)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -1060,7 +1060,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_physics",
-    "description": "bonfyre-physics \u2014 Hamiltonian Version Control Protocol (HVCP) CLI. (category: inference)",
+    "description": "akai-physics \u2014 Hamiltonian Version Control Protocol (HVCP) CLI. (category: inference)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -1081,7 +1081,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_pipeline",
-    "description": "BonfyrePipeline \u2014 unified single-process pipeline. (category: pipeline)",
+    "description": "AkaiPipeline \u2014 unified single-process pipeline. (category: pipeline)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -1102,7 +1102,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_project",
-    "description": "BonfyreProject operator. (category: data)",
+    "description": "AkaiProject operator. (category: data)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -1123,7 +1123,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_proof",
-    "description": "BonfyreProof operator. Accepts: .bf. Produces: .bfproof. (category: artifacts)",
+    "description": "AkaiProof operator. Accepts: .bf. Produces: .bfproof. (category: artifacts)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -1144,7 +1144,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_proxy",
-    "description": "BonfyreProxy \u2014 OpenAI-compatible API shim for Bonfyre binaries. (category: platform)",
+    "description": "AkaiProxy \u2014 OpenAI-compatible API shim for Akai binaries. (category: platform)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -1165,7 +1165,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_quant",
-    "description": "bonfyre-quant \u2014 FPQ v8 Recursive Lattice-Flow weight quantization. (category: data)",
+    "description": "akai-quant \u2014 FPQ v8 Recursive Lattice-Flow weight quantization. (category: data)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -1186,7 +1186,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_query",
-    "description": "BonfyreQuery \u2014 local analytics engine over artifacts via DuckDB. (category: knowledge)",
+    "description": "AkaiQuery \u2014 local analytics engine over artifacts via DuckDB. (category: knowledge)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -1207,7 +1207,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_queue",
-    "description": "BonfyreQueue v2 \u2014 SQLite-backed job queue with built-in worker daemon. (category: pipeline)",
+    "description": "AkaiQueue v2 \u2014 SQLite-backed job queue with built-in worker daemon. (category: pipeline)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -1228,7 +1228,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_reason",
-    "description": "bonfyre-reason \u2014 Reason-state operator over the HVCP stack. (category: specialized)",
+    "description": "akai-reason \u2014 Reason-state operator over the HVCP stack. (category: specialized)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -1249,7 +1249,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_recipe",
-    "description": "BonfyreRecipe \u2014 Recipe Registry Management. Produces: .bfrecipe. (category: pipeline)",
+    "description": "AkaiRecipe \u2014 Recipe Registry Management. Produces: .bfrecipe. (category: pipeline)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -1270,7 +1270,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_render",
-    "description": "BonfyreRender operator. (category: artifacts)",
+    "description": "AkaiRender operator. (category: artifacts)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -1291,7 +1291,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_repurpose",
-    "description": "BonfyreRepurpose \u2014 Transform brief artifacts into social media formats. (category: media)",
+    "description": "AkaiRepurpose \u2014 Transform brief artifacts into social media formats. (category: media)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -1312,7 +1312,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_run",
-    "description": "BonfyreRun \u2014 Recipe Executor. (category: pipeline)",
+    "description": "AkaiRun \u2014 Recipe Executor. (category: pipeline)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -1354,7 +1354,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_sae",
-    "description": "bonfyre-sae \u2014 SAE feature dictionary runtime. Produces: .bfsae. (category: inference)",
+    "description": "akai-sae \u2014 SAE feature dictionary runtime. Produces: .bfsae. (category: inference)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -1375,7 +1375,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_sli",
-    "description": "bonfyre-sli \u2014 Structured Layer Inference. Accepts: .bfqx, .bfsae. (category: inference)",
+    "description": "akai-sli \u2014 Structured Layer Inference. Accepts: .bfqx, .bfsae. (category: inference)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -1396,7 +1396,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_scene_detect",
-    "description": "bonfyre-scene-detect. (category: media)",
+    "description": "akai-scene-detect. (category: media)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -1417,7 +1417,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_segment",
-    "description": "BonfyreSegment \u2014 Idea Boundary Detection + Segment Graph. (category: specialized)",
+    "description": "AkaiSegment \u2014 Idea Boundary Detection + Segment Graph. (category: specialized)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -1438,7 +1438,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_space",
-    "description": "bonfyre-space \u2014 shared memory substrate. (category: knowledge)",
+    "description": "akai-space \u2014 shared memory substrate. (category: knowledge)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -1459,7 +1459,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_speech_loop",
-    "description": "BonfyreSpeechLoop \u2014 Whisper \u2192 Transform \u2192 Piper speech transformation. (category: media)",
+    "description": "AkaiSpeechLoop \u2014 Whisper \u2192 Transform \u2192 Piper speech transformation. (category: media)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -1480,7 +1480,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_stitch",
-    "description": "BonfyreStitch \u2014 DAG materializer. (category: media)",
+    "description": "AkaiStitch \u2014 DAG materializer. (category: media)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -1501,7 +1501,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_surface",
-    "description": "BonfyreSurface operator. (category: specialized)",
+    "description": "AkaiSurface operator. (category: specialized)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -1522,7 +1522,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_swarm",
-    "description": "BonfyreSwarm \u2014 P2P artifact distribution via BitTorrent v2 protocol. (category: pipeline)",
+    "description": "AkaiSwarm \u2014 P2P artifact distribution via BitTorrent v2 protocol. (category: pipeline)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -1543,7 +1543,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_sync",
-    "description": "BonfyreSync operator. (category: artifacts)",
+    "description": "AkaiSync operator. (category: artifacts)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -1564,7 +1564,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_tag",
-    "description": "BonfyreTag \u2014 instant intent/topic tagging via fastText (pure C). Produces: .bftag. (category: knowledge)",
+    "description": "AkaiTag \u2014 instant intent/topic tagging via fastText (pure C). Produces: .bftag. (category: knowledge)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -1585,7 +1585,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_tel",
-    "description": "BonfyreTel \u2014 FreeSWITCH Event Socket telephony adapter. (category: platform)",
+    "description": "AkaiTel \u2014 FreeSWITCH Event Socket telephony adapter. (category: platform)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -1606,7 +1606,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_tier",
-    "description": "bonfyre-tier \u2014 latency tier management and SLA enforcement. (category: data)",
+    "description": "akai-tier \u2014 latency tier management and SLA enforcement. (category: data)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -1627,7 +1627,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_time",
-    "description": "bonfyre-time \u2014 temporal pipeline manager. (category: data)",
+    "description": "akai-time \u2014 temporal pipeline manager. (category: data)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -1648,7 +1648,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_tone",
-    "description": "BonfyreTone \u2014 speech tone/emotion/rhythm extraction via OpenSMILE. Produces: .bftone. (category: media)",
+    "description": "AkaiTone \u2014 speech tone/emotion/rhythm extraction via OpenSMILE. Produces: .bftone. (category: media)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -1690,7 +1690,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_transcript_clean",
-    "description": "BonfyreTranscriptClean operator. (category: specialized)",
+    "description": "AkaiTranscriptClean operator. (category: specialized)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -1711,7 +1711,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_transcript_family",
-    "description": "BonfyreTranscriptFamily operator. (category: specialized)",
+    "description": "AkaiTranscriptFamily operator. (category: specialized)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -1732,7 +1732,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_vec",
-    "description": "BonfyreVec \u2014 local vector search via sqlite-vec. Accepts: .bf. Produces: .bfvec. (category: knowledge)",
+    "description": "AkaiVec \u2014 local vector search via sqlite-vec. Accepts: .bf. Produces: .bfvec. (category: knowledge)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -1753,7 +1753,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_video_demux",
-    "description": "bonfyre-video-demux. (category: media)",
+    "description": "akai-video-demux. (category: media)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -1774,7 +1774,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_violence",
-    "description": "bonfyre-violence \u2014 real coupling test harness. (category: specialized)",
+    "description": "akai-violence \u2014 real coupling test harness. (category: specialized)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -1795,7 +1795,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_watch",
-    "description": "BonfyreWatch operator. (category: platform)",
+    "description": "AkaiWatch operator. (category: platform)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -1816,7 +1816,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_weaviate_index",
-    "description": "BonfyreWeaviateIndex operator. (category: specialized)",
+    "description": "AkaiWeaviateIndex operator. (category: specialized)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -1837,7 +1837,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_wire",
-    "description": "BonfyreWire operator. (category: platform)",
+    "description": "AkaiWire operator. (category: platform)",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -1858,7 +1858,7 @@ const TOOL_DEFS = [
   },
   {
     "name": "akai_workflow",
-    "description": "bonfyre-workflow - workflow profile browser. (category: pipeline)",
+    "description": "akai-workflow - workflow profile browser. (category: pipeline)",
     "inputSchema": {
       "type": "object",
       "properties": {
