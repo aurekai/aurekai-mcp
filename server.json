@@ -1,0 +1,16 @@
+{
+  "name": "io.github.aurekai.aurekai-mcp",
+  "description": "Aurekai MCP server for akai doctor, manifests, artifacts, feature queries, and runtime inspection.",
+  "status": "active",
+  "repository": {
+    "url": "https://github.com/aurekai/aurekai-mcp",
+    "source": "github"
+  },
+  "packages": [
+    {
+      "registry_type": "npm",
+      "identifier": "@aurekai/mcp",
+      "version": "0.8.0-alpha.1"
+    }
+  ]
+}
