@@ -1,0 +1,16 @@
+# Exclude native binary sources — users get the runtime via aurekai/native-runtime
+cmd/
+lib/
+tmp/
+test-audio/
+test-speech/
+real-data/
+output/
+reports/
+investigation_out/
+*.sh
+Dockerfile
+docker-compose.yml
+Makefile
+*.md
+!README.md
