@@ -1,0 +1,25 @@
+{
+  "id": "aurekai-mcp",
+  "name": "Aurekai MCP",
+  "shortDescription": "89 native runtime operators via MCP — artifacts, proof bundles, semantic cache, model memory.",
+  "longDescription": "Aurekai MCP server exposes the full Aurekai native runtime to any MCP-compatible host. Includes: akai doctor, manifest validation, artifact inspection, feature queries, semantic search, proof bundle export (.akrun.json, .akproof.json, .aktrace.jsonl, .akfeatures.json, .akcost.json), and the complete family of 89 Aurekai binary operators.\n\nInstall via npx:\n```\nnpx -y @aurekai/mcp\n```\n\nOr add to Claude Desktop `mcpServers`:\n```json\n{\n  \"mcpServers\": {\n    \"aurekai\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@aurekai/mcp\"]\n    }\n  }\n}\n```",
+  "homepage": "https://github.com/aurekai/aurekai-mcp",
+  "repository": "https://github.com/aurekai/aurekai-mcp",
+  "license": "Apache-2.0",
+  "version": "0.8.0-alpha.4",
+  "author": {
+    "name": "Aurekai",
+    "url": "https://github.com/aurekai"
+  },
+  "tags": ["mcp", "ai", "artifacts", "runtime", "operators", "proof"],
+  "categories": ["developer-tools", "ai-infrastructure"],
+  "install": {
+    "npm": {
+      "package": "@aurekai/mcp",
+      "version": "0.8.0-alpha.4",
+      "command": "npx",
+      "args": ["-y", "@aurekai/mcp"]
+    }
+  },
+  "transport": "stdio"
+}

@@ -1,0 +1,47 @@
+{
+  "name": "aurekai-mcp",
+  "display_name": "Aurekai MCP",
+  "description": "Aurekai MCP server exposing 89 native runtime operators — doctor, manifests, artifact inspection, feature queries, semantic search, proof bundles, and the full Aurekai binary family.",
+  "homepage": "https://github.com/aurekai/aurekai-mcp",
+  "repository": "https://github.com/aurekai/aurekai-mcp",
+  "license": "Apache-2.0",
+  "version": "0.8.0-alpha.4",
+  "tags": ["ai", "artifacts", "runtime", "model-memory", "semantic-cache", "proof", "operators"],
+  "install": {
+    "type": "npm",
+    "package": "@aurekai/mcp",
+    "version": "0.8.0-alpha.4"
+  },
+  "transport": {
+    "type": "stdio",
+    "command": "npx",
+    "args": ["-y", "@aurekai/mcp"]
+  },
+  "tools": [
+    {
+      "name": "akai_doctor",
+      "description": "Run aurekai doctor --deep to verify the runtime installation"
+    },
+    {
+      "name": "akai_manifest",
+      "description": "Validate and inspect an Aurekai intake manifest"
+    },
+    {
+      "name": "akai_embed",
+      "description": "Run the Aurekai embed operator for vector embedding"
+    },
+    {
+      "name": "akai_fpq",
+      "description": "Feature-Proof Queue operator — enqueue and track proof bundles"
+    },
+    {
+      "name": "akai_tag",
+      "description": "Tag operator — apply semantic tags to artifacts"
+    },
+    {
+      "name": "akai_export",
+      "description": "Export operator — produce proof bundles (.akrun, .akproof, .aktrace)"
+    }
+  ],
+  "categories": ["developer-tools", "ai-agents", "data-processing"]
+}
