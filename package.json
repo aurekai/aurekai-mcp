@@ -1,18 +1,19 @@
 {
   "name": "@aurekai/mcp",
   "version": "0.8.0-alpha.1",
+  "mcpName": "io.github.aurekai.aurekai-mcp",
   "description": "Aurekai MCP server exposing akai runtime helpers.",
   "type": "module",
   "license": "MIT",
   "bin": {
-    "aurekai-mcp": "./server.mjs"
+    "aurekai-mcp": "server.mjs"
   },
   "scripts": {
     "start": "node ./server.mjs"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/aurekai/aurekai-mcp.git"
+    "url": "git+https://github.com/aurekai/aurekai-mcp.git"
   },
   "engines": {
     "node": ">=18"
