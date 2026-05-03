@@ -6,12 +6,12 @@
     "url": "https://github.com/aurekai/aurekai-mcp",
     "source": "github"
   },
-  "version": "0.8.0-alpha.2",
+  "version": "0.8.0-alpha.3",
   "packages": [
     {
       "registryType": "npm",
       "identifier": "@aurekai/mcp",
-      "version": "0.8.0-alpha.2",
+      "version": "0.8.0-alpha.3",
       "transport": {
         "type": "stdio"
       }

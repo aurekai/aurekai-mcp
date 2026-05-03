@@ -1,10 +1,10 @@
 {
   "name": "@aurekai/mcp",
-  "version": "0.8.0-alpha.2",
+  "version": "0.8.0-alpha.3",
   "mcpName": "io.github.aurekai/aurekai-mcp",
   "description": "Aurekai MCP server exposing akai runtime helpers.",
   "type": "module",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "bin": {
     "aurekai-mcp": "server.mjs"
   },
