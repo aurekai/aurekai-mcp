@@ -1,11 +1,13 @@
 #!/usr/bin/env node
 // SPDX-License-Identifier: Apache-2.0
-// aurekai-mcp — Aurekai MCP server exposing 89 native runtime operators
-// Implements MCP stdio JSON-RPC transport (spec: modelcontextprotocol.io)
+// aurekai-mcp — Aurekai MCP server (Phase 2: capability-native)
+// Implements MCP stdio + Streamable HTTP transports (spec: modelcontextprotocol.io)
 import { spawnSync } from "node:child_process";
 import { createInterface } from "node:readline";
+import { createServer } from "node:http";
+import { randomUUID } from "node:crypto";
 
-const VERSION = "0.8.0-alpha.3";
+const VERSION = "0.8.0-alpha.5";
 
 const TOOL_DEFS = [
   {
@@ -1971,6 +1973,225 @@ const AKAI_CMD_MAP = {
   "akai_workflow": "workflow"
 };
 
+// ── Phase 2: Capability-native annotations ────────────────────────────────────
+
+const FAMILY_MAP = {
+  akai_api: "runtime",      akai_control: "runtime",  akai_queue: "runtime",
+  akai_tier: "runtime",     akai_workflow: "runtime", akai_stitch: "runtime",
+  akai_watch: "runtime",    akai_pipeline: "runtime", akai_proxy: "runtime",
+  akai_run: "runtime",      akai_runtime: "runtime",
+  akai_auth: "commerce",    akai_gate: "commerce",    akai_meter: "commerce",
+  akai_ledger: "commerce",  akai_finance: "commerce", akai_pay: "commerce",
+  akai_cms: "commerce",     akai_outreach: "commerce",akai_project: "commerce",
+  akai_offer: "commerce",   akai_economy: "commerce",
+  akai_ingest: "intake",    akai_media_prep: "intake",  akai_transcribe: "intake",
+  akai_transcript_clean: "intake", akai_transcript_family: "intake",
+  akai_segment: "intake",   akai_paragraph: "intake", akai_frame_extract: "intake",
+  akai_video_demux: "intake", akai_scene_detect: "intake", akai_speech_loop: "intake",
+  akai_detect_objects: "intake",
+  akai_model: "memory",     akai_fpq: "memory",       akai_fpqx: "memory",
+  akai_quant: "memory",     akai_sli: "memory",       akai_layer: "memory",
+  akai_embed: "memory",     akai_vec: "memory",       akai_sae: "memory",
+  akai_kv_cache: "memory",  akai_weaviate_index: "memory",
+  akai_canon: "proof",      akai_hash: "proof",       akai_graph: "proof",
+  akai_index: "proof",      akai_entity: "proof",     akai_query: "proof",
+  akai_proof: "proof",      akai_family: "proof",
+  akai_reason: "reason",    akai_physics: "reason",   akai_flow: "reason",
+  akai_learn: "reason",     akai_leapfrog: "reason",
+  akai_tel: "wire",         akai_wire: "wire",        akai_moq: "wire",
+  akai_net: "wire",         akai_recipe: "wire",
+  akai_brief: "publish",    akai_narrate: "publish",  akai_render: "publish",
+  akai_pack: "publish",     akai_emit: "publish",     akai_distribute: "publish",
+  akai_clips: "publish",    akai_repurpose: "publish",akai_surface: "publish",
+  akai_capability: "substrate", akai_space: "substrate", akai_time: "substrate",
+  akai_compress: "substrate",   akai_violence: "substrate",
+  akai_gen: "substrate",    akai_tag: "substrate",    akai_sync: "substrate",
+  akai_swarm: "substrate",  akai_discip: "substrate", akai_fragment: "substrate",
+  akai_flash_qla: "substrate",  akai_mfa_dict: "substrate",
+  akai_cli: "substrate",    akai_orchestrate: "substrate", akai_tone: "substrate",
+};
+
+const PROOF_EMITTING = new Set([
+  "akai_proof", "akai_canon", "akai_hash", "akai_graph", "akai_index",
+  "akai_pipeline", "akai_workflow",
+]);
+
+const READONLY_TOOLS = new Set([
+  "akai_capability", "akai_runtime", "akai_api", "akai_query", "akai_layer",
+  "akai_model", "akai_queue", "akai_watch", "akai_index", "akai_graph",
+  "akai_ledger", "akai_meter", "akai_vec", "akai_embed", "akai_sae",
+  "akai_entity", "akai_transcript_family",
+]);
+
+const IDEMPOTENT_TOOLS = new Set([
+  "akai_hash", "akai_embed", "akai_vec", "akai_query", "akai_entity",
+  "akai_compress", "akai_quant", "akai_fpq", "akai_fpqx",
+  "akai_transcribe", "akai_transcript_clean",
+]);
+
+// Inject MCP tool annotations and family prefix into every tool definition
+for (const tool of TOOL_DEFS) {
+  const family = FAMILY_MAP[tool.name] || "substrate";
+  tool.annotations = {
+    readOnlyHint:    READONLY_TOOLS.has(tool.name),
+    destructiveHint: tool.name === "akai_violence" || tool.name === "akai_pipeline",
+    idempotentHint:  IDEMPOTENT_TOOLS.has(tool.name) || READONLY_TOOLS.has(tool.name),
+    openWorldHint:   false,
+  };
+  if (!tool.description.startsWith(`[${family}]`)) {
+    tool.description = `[${family}] ${tool.description}`;
+  }
+}
+
+// ── MCP Resources ─────────────────────────────────────────────────────────────
+
+const RESOURCES = [
+  {
+    uri: "aurekai://runtime/capabilities",
+    name: "Capability Registry",
+    description: "All 9 Akai capability families, 111 commands, packs A–I, and experimental tracks.",
+    mimeType: "application/json",
+  },
+  {
+    uri: "aurekai://queue/stats",
+    name: "Queue Stats",
+    description: "Live job queue depth, throughput, and error rates for all Akai operators.",
+    mimeType: "application/json",
+  },
+  {
+    uri: "aurekai://ledger/portfolio",
+    name: "Commerce Ledger Portfolio",
+    description: "Aggregate billing, usage metering, and invoice records.",
+    mimeType: "application/json",
+  },
+  {
+    uri: "aurekai://models",
+    name: "Model Registry",
+    description: "All registered model entries: id, path, quantization, family compatibility.",
+    mimeType: "application/json",
+  },
+  {
+    uri: "aurekai://model-memory",
+    name: "Model Memory",
+    description: "FPQ compressed model memory state: lattice alignment, KV cache ancestry.",
+    mimeType: "application/json",
+  },
+  {
+    uri: "aurekai://features/{artifact}",
+    name: "Feature Report",
+    description: "Feature-level activation report for a given artifact id. Replace {artifact} with artifact id.",
+    mimeType: "application/json",
+  },
+  {
+    uri: "aurekai://proof/{id}",
+    name: "Proof Bundle",
+    description: "Canonical proof bundle (.akproof) for a given artifact or run id. Replace {id} with proof id.",
+    mimeType: "application/json",
+  },
+  {
+    uri: "aurekai://graph/{node}/lineage",
+    name: "Lineage Graph",
+    description: "Merkle-rooted lineage graph for a workflow node. Replace {node} with node id.",
+    mimeType: "application/json",
+  },
+  {
+    uri: "aurekai://space/{name}",
+    name: "Space",
+    description: "Named project space with manifest, jobs, and artifacts. Replace {name} with space name.",
+    mimeType: "application/json",
+  },
+  {
+    uri: "aurekai://wire/{capture_id}",
+    name: "Wire Capture",
+    description: "Captured wire session: PCAP summary, SIP events, call graph. Replace {capture_id} with session id.",
+    mimeType: "application/json",
+  },
+  {
+    uri: "aurekai://project/{id}",
+    name: "Project",
+    description: "Full project record: client, deliverables, timeline, invoice refs. Replace {id} with project id.",
+    mimeType: "application/json",
+  },
+  {
+    uri: "aurekai://invoice/{id}",
+    name: "Invoice",
+    description: "Commerce invoice document with line items and payment status. Replace {id} with invoice id.",
+    mimeType: "application/json",
+  },
+  {
+    uri: "aurekai://cms/{entry_id}",
+    name: "CMS Entry",
+    description: "Published CMS content entry with format, metadata, and proof ref. Replace {entry_id} with entry id.",
+    mimeType: "application/json",
+  },
+];
+
+// ── MCP Prompts ───────────────────────────────────────────────────────────────
+
+const PROMPTS = [
+  {
+    name: "turn-this-call-into-a-deliverable",
+    description: "Given a raw call recording or audio file, transcribe, clean, brief, and produce a client deliverable.",
+    arguments: [
+      { name: "audio_path",   description: "Path or URI to audio/call recording", required: true },
+      { name: "client_name",  description: "Client name for the deliverable header", required: false },
+    ],
+  },
+  {
+    name: "inspect-this-artifact-lineage",
+    description: "Resolve the full Merkle lineage and proof chain for a given artifact id.",
+    arguments: [
+      { name: "artifact_id", description: "Artifact id or proof bundle id to inspect", required: true },
+    ],
+  },
+  {
+    name: "build-a-model-memory-pack",
+    description: "Compress and pack model weights via FPQ, run roundtrip, and export a memory pack.",
+    arguments: [
+      { name: "model_path",  description: "Local path to model weights", required: true },
+      { name: "target_bits", description: "Target quantization bits (default: 4)", required: false },
+    ],
+  },
+  {
+    name: "compare-these-reasoning-branches",
+    description: "Run two reasoning branches and produce a diff report with recommendation.",
+    arguments: [
+      { name: "branch_a", description: "First reasoning context or task description",  required: true },
+      { name: "branch_b", description: "Second reasoning context or task description", required: true },
+    ],
+  },
+  {
+    name: "generate-client-invoice-from-usage",
+    description: "Pull metering records, apply margin rules, and generate a commerce invoice.",
+    arguments: [
+      { name: "client_id", description: "Client identifier",                       required: true },
+      { name: "period",    description: "Billing period (e.g. 2025-05)",           required: false },
+    ],
+  },
+  {
+    name: "produce-wire-device-report",
+    description: "Ingest a PCAP or wire capture and produce a device event and SIP report.",
+    arguments: [
+      { name: "capture_path", description: "Path to PCAP or wire capture file", required: true },
+    ],
+  },
+  {
+    name: "run-a-release-gate",
+    description: "Run all release gate checks: proof validation, manifest verify, SLI auto-run.",
+    arguments: [
+      { name: "release_tag", description: "Git tag or release version to gate", required: true },
+    ],
+  },
+  {
+    name: "make-a-client-brief-from-this-audio",
+    description: "Transcribe audio, extract key points, and generate a structured client brief.",
+    arguments: [
+      { name: "audio_path", description: "Path or URI to audio recording",                             required: true },
+      { name: "format",     description: "Output format: markdown, pdf, docx (default: markdown)",    required: false },
+    ],
+  },
+];
+
 function findAkai() {
   const candidates = [
     process.env.AKAI_BIN,
@@ -2017,7 +2238,12 @@ function handle(req) {
   if (method === "initialize") {
     return ok(id, {
       protocolVersion: "2024-11-05",
-      capabilities: { tools: {} },
+      capabilities: {
+        tools:     {},
+        resources: { subscribe: true, listChanged: true },
+        prompts:   { listChanged: false },
+        logging:   {},
+      },
       serverInfo: { name: "aurekai-mcp", version: VERSION },
     });
   }
@@ -2035,13 +2261,153 @@ function handle(req) {
       return err(id, -32601, `Unknown tool: ${name}`);
     }
     const result = runOperator(akaiCmd, args.args || [], args.stdin || "");
+    const isError = !!(result.error || result.exit_code !== 0);
     const text = result.error
       ? `Error: ${result.error}`
       : `exit: ${result.exit_code}\n${result.stdout}${result.stderr ? "\nstderr: " + result.stderr : ""}`;
-    return ok(id, {
+
+    const runId = randomUUID();
+    const family = FAMILY_MAP[name] || "substrate";
+    const proofEmitting = PROOF_EMITTING.has(name);
+
+    const response = {
       content: [{ type: "text", text }],
-      isError: !!(result.error || result.exit_code !== 0),
+      isError,
+      _meta: {
+        run_id:        runId,
+        family,
+        operator:      akaiCmd,
+        proof_emitting: proofEmitting,
+        ...(proofEmitting && !isError ? {
+          artifact_uri: `aurekai://proof/${runId}`,
+          lineage_uri:  `aurekai://graph/${runId}/lineage`,
+        } : {}),
+      },
+    };
+
+    // Embed artifact resource reference when a proof-emitting tool succeeds
+    if (proofEmitting && !isError) {
+      response.content.push({
+        type: "resource",
+        resource: {
+          uri:      `aurekai://proof/${runId}`,
+          mimeType: "application/json",
+          text: JSON.stringify({ proof_id: runId, operator: akaiCmd, family, status: "pending" }),
+        },
+      });
+    }
+
+    return ok(id, response);
+  }
+
+  if (method === "resources/list") {
+    const cursor = params?.cursor ? parseInt(params.cursor, 10) : 0;
+    const pageSize = 10;
+    const page = RESOURCES.slice(cursor, cursor + pageSize);
+    const nextCursor = cursor + pageSize < RESOURCES.length
+      ? String(cursor + pageSize)
+      : undefined;
+    const result = { resources: page };
+    if (nextCursor) result.nextCursor = nextCursor;
+    return ok(id, result);
+  }
+
+  if (method === "resources/read") {
+    const { uri } = params || {};
+    if (!uri) return err(id, -32602, "Missing uri param");
+
+    // Static resources
+    const staticResource = RESOURCES.find(r => r.uri === uri);
+
+    // Runtime read: for template URIs return stub JSON
+    let contents;
+    if (uri === "aurekai://runtime/capabilities") {
+      const akai = findAkai();
+      let capText;
+      if (akai) {
+        const r = spawnSync(akai, ["runtime", "capabilities", "--json"], { encoding: "utf-8", timeout: 5000 });
+        capText = r.stdout || JSON.stringify({ error: "no output", stderr: r.stderr });
+      } else {
+        capText = JSON.stringify({ error: "akai not found on PATH", families: 9, commands: 111, version: VERSION });
+      }
+      contents = [{ uri, mimeType: "application/json", text: capText }];
+    } else if (uri === "aurekai://queue/stats") {
+      const akai = findAkai();
+      let statsText;
+      if (akai) {
+        const r = spawnSync(akai, ["queue", "stats", "--json"], { encoding: "utf-8", timeout: 5000 });
+        statsText = r.stdout || JSON.stringify({ error: "no output" });
+      } else {
+        statsText = JSON.stringify({ error: "akai not found on PATH" });
+      }
+      contents = [{ uri, mimeType: "application/json", text: statsText }];
+    } else if (uri === "aurekai://models") {
+      const akai = findAkai();
+      let modelsText;
+      if (akai) {
+        const r = spawnSync(akai, ["model", "list", "--json"], { encoding: "utf-8", timeout: 5000 });
+        modelsText = r.stdout || JSON.stringify({ error: "no output" });
+      } else {
+        modelsText = JSON.stringify({ error: "akai not found on PATH" });
+      }
+      contents = [{ uri, mimeType: "application/json", text: modelsText }];
+    } else if (staticResource) {
+      // Template or live resources: return a stub with instructions
+      contents = [{
+        uri,
+        mimeType: staticResource.mimeType,
+        text: JSON.stringify({
+          _stub: true,
+          description: staticResource.description,
+          hint: "Invoke the corresponding akai operator with the relevant id/name to get live data.",
+        }),
+      }];
+    } else {
+      return err(id, -32602, `Unknown resource URI: ${uri}`);
+    }
+
+    return ok(id, { contents });
+  }
+
+  if (method === "resources/subscribe") {
+    // Acknowledge subscription — live push not yet implemented
+    return ok(id, {});
+  }
+
+  if (method === "resources/unsubscribe") {
+    return ok(id, {});
+  }
+
+  if (method === "prompts/list") {
+    return ok(id, { prompts: PROMPTS });
+  }
+
+  if (method === "prompts/get") {
+    const { name, arguments: args = {} } = params || {};
+    const prompt = PROMPTS.find(p => p.name === name);
+    if (!prompt) return err(id, -32602, `Unknown prompt: ${name}`);
+
+    // Build messages array from prompt arguments
+    const parts = [];
+    for (const arg of (prompt.arguments || [])) {
+      const val = args[arg.name];
+      if (val) parts.push(`${arg.name}: ${val}`);
+    }
+    const userText = parts.length
+      ? `[${name}]\n${parts.join("\n")}`
+      : `[${name}]\n${prompt.description}`;
+
+    return ok(id, {
+      description: prompt.description,
+      messages: [
+        { role: "user", content: { type: "text", text: userText } },
+      ],
     });
+  }
+
+  if (method === "logging/setLevel") {
+    // Accept level changes — logging to stderr
+    return ok(id, {});
   }
 
   if (method === "ping") return ok(id, {});
@@ -2049,7 +2415,41 @@ function handle(req) {
   return err(id, -32601, `Method not found: ${method}`);
 }
 
-// stdio transport
+// ── Streamable HTTP transport ─────────────────────────────────────────────────
+// Enabled when AKAI_MCP_HTTP_PORT is set (e.g. AKAI_MCP_HTTP_PORT=3100)
+const HTTP_PORT = process.env.AKAI_MCP_HTTP_PORT ? parseInt(process.env.AKAI_MCP_HTTP_PORT, 10) : null;
+
+if (HTTP_PORT) {
+  const httpServer = createServer((req, res) => {
+    if (req.method !== "POST" || req.url !== "/mcp") {
+      res.writeHead(404, { "Content-Type": "application/json" });
+      res.end(JSON.stringify({ error: "Not found — POST to /mcp" }));
+      return;
+    }
+    let body = "";
+    req.on("data", chunk => { body += chunk; });
+    req.on("end", () => {
+      let parsed;
+      try { parsed = JSON.parse(body); } catch {
+        res.writeHead(400, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ jsonrpc: "2.0", id: null, error: { code: -32700, message: "Parse error" } }));
+        return;
+      }
+      const requests = Array.isArray(parsed) ? parsed : [parsed];
+      const responses = requests
+        .map(r => handle(r))
+        .filter(Boolean);
+      const out = responses.length === 1 ? responses[0] : JSON.stringify(responses.map(r => JSON.parse(r)));
+      res.writeHead(200, { "Content-Type": "application/json" });
+      res.end(out);
+    });
+  });
+  httpServer.listen(HTTP_PORT, "127.0.0.1", () => {
+    process.stderr.write(`aurekai-mcp HTTP transport listening on http://127.0.0.1:${HTTP_PORT}/mcp\n`);
+  });
+}
+
+// ── stdio transport ───────────────────────────────────────────────────────────
 const rl = createInterface({ input: process.stdin, terminal: false });
 rl.on("line", (line) => {
   const trimmed = line.trim();

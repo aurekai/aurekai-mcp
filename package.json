@@ -1,8 +1,8 @@
 {
   "name": "@aurekai/mcp",
-  "version": "0.8.0-alpha.4",
+  "version": "0.8.0-alpha.5",
   "mcpName": "io.github.aurekai/aurekai-mcp",
-  "description": "Aurekai MCP server exposing akai runtime helpers.",
+  "description": "Aurekai MCP server — capability-native, 89 operators, resources, prompts, Streamable HTTP.",
   "type": "module",
   "license": "Apache-2.0",
   "bin": {

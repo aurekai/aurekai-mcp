@@ -1,17 +1,17 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.aurekai/aurekai-mcp",
-  "description": "Aurekai MCP server for akai doctor, manifests, artifacts, feature queries, and runtime inspection.",
+  "description": "Aurekai MCP server — 89 operators across 9 capability families, resources, prompts, tool annotations, _meta proof propagation, Streamable HTTP.",
   "repository": {
     "url": "https://github.com/aurekai/aurekai-mcp",
     "source": "github"
   },
-  "version": "0.8.0-alpha.4",
+  "version": "0.8.0-alpha.5",
   "packages": [
     {
       "registryType": "npm",
       "identifier": "@aurekai/mcp",
-      "version": "0.8.0-alpha.4",
+      "version": "0.8.0-alpha.5",
       "transport": {
         "type": "stdio"
       }
